@@ -1,0 +1,16 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: first-service
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://127.0.0.1:8761/eureka # Eureka Server endpoint used to register Eureka client
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
