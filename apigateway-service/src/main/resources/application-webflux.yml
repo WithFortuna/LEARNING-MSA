@@ -15,6 +15,7 @@ spring:
                 baseMessage: This is Spring Cloud Gateway WebFlux Global filter message
                 preLogger: true
                 postLogger: true
+            - name: ServicePrefixStripGlobalFilter
           routes:
             - id: first-service
               uri: lb://FIRST-SERVICE
@@ -23,6 +24,7 @@ spring:
               filters:
                 - AddRequestHeader=filter-add-request, 1st-request-header-added
                 - AddResponseHeader=filter-add-response, 1st-response-header-added
+                - StripPrefix=1
                 - name: LoggingFilter
                   args:
                     baseMessage: This is Spring Cloud Gateway WebFlux Logging filter message
@@ -37,13 +39,21 @@ spring:
                 - AddRequestHeader=filter-add-request, 2nd-request-header-added
                 - AddResponseHeader=filter-add-response, 2nd-response-header-added
                 - CustomFilter
-
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/user-service/**
+              filters:
+                - AddRequestHeader=filter-add-request, 2nd-request-header-added
+                - AddResponseHeader=filter-add-response, 2nd-response-header-added
+                - CustomFilter
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
       default-zone: http://localhost:8761/eureka
+    registry-fetch-interval-seconds: 5
 
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
