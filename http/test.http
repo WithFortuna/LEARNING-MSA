@@ -4,3 +4,13 @@ GET localhost:8081/first-service/welcome
 ### message
 GET localhost:8081/first-service/message
 filter-add-request: hallo
+
+### create user
+POST localhost:8000/user-service/users
+Content-Type: application/json
+
+{
+  "email": "rmsghchl02@gmail.com",
+  "name":"gno1",
+  "password": "12345"
+}
