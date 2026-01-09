@@ -4,6 +4,7 @@ import cleanhouse.userservice.user.domain.entity.User;
 import cleanhouse.userservice.user.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements UserRepository {
     private final UserSpringDataRepository springDataRepository;
+    @Qualifier("userModelMapper")
     private final ModelMapper modelMapper;
 
     @Override
