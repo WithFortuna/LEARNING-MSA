@@ -16,6 +16,7 @@ spring:
                 preLogger: true
                 postLogger: true
             - name: ServicePrefixStripGlobalFilter
+            - name: AuthorizationHeaderFilter
           routes:
             - id: first-service
               uri: lb://FIRST-SERVICE
@@ -79,3 +80,6 @@ eureka:
 
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+jwt:
+  secret-key: ${JWT_SECRET}
