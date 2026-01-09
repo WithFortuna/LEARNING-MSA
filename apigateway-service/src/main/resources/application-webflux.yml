@@ -47,6 +47,23 @@ spring:
                 - AddRequestHeader=filter-add-request, 2nd-request-header-added
                 - AddResponseHeader=filter-add-response, 2nd-response-header-added
                 - CustomFilter
+            - id: catalog-service
+              uri: lb://CATALOG-SERVICE
+              predicates:
+                - Path=/catalog-service/**
+              filters:
+                - AddRequestHeader=filter-add-request, 2nd-request-header-added
+                - AddResponseHeader=filter-add-response, 2nd-response-header-added
+                - CustomFilter
+            - id: order-service
+              uri: lb://ORDER-SERVICE
+              predicates:
+                - Path=/order-service/**
+              filters:
+                - AddRequestHeader=filter-add-request, 2nd-request-header-added
+                - AddResponseHeader=filter-add-response, 2nd-response-header-added
+                - CustomFilter
+
 eureka:
   client:
     fetch-registry: true
