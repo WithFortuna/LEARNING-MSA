@@ -1,6 +1,6 @@
 package cleanhouse.userservice.user.application.command;
 
-import cleanhouse.userservice.user.application.port.UserCommandService;
+import cleanhouse.userservice.user.application.port.UserRegisterUsecase;
 import cleanhouse.userservice.user.domain.entity.User;
 import cleanhouse.userservice.user.domain.exception.DuplicateEmailException;
 import cleanhouse.userservice.user.domain.port.UserRepository;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserRegisterCommandHandler implements UserCommandService {
+public class UserRegisterCommandHandler implements UserRegisterUsecase {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
