@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = getJwtFromRequest(request);
 
-            if (StringUtils.hasText(jwt)) {
+            if (requestIncludeToken(jwt)) {
                 if (tokenBlacklistAdapter.isBlacklisted(jwt)) {
                     log.warn("Attempted to use blacklisted token");
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token has been revoked");
@@ -78,6 +78,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    private static boolean requestIncludeToken(String jwt) {
+        return StringUtils.hasText(jwt);
+    }
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
@@ -94,7 +98,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+        if (requestIncludeToken(bearerToken) && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;

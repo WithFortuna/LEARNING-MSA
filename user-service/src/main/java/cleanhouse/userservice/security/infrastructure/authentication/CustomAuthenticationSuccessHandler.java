@@ -4,6 +4,8 @@ import cleanhouse.userservice.security.infrastructure.jwt.JwtTokenProvider;
 import cleanhouse.userservice.security.infrastructure.token.RefreshTokenStoreAdapter;
 import cleanhouse.userservice.security.infrastructure.userdetails.CustomUserDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -39,14 +41,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         log.info("User logged in successfully: {}", email);
 
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("accessToken", accessToken);
-        tokens.put("refreshToken", refreshToken);
-        tokens.put("tokenType", "Bearer");
-
+        response.setHeader("accessToken", accessToken);
+        response.addCookie(new Cookie("refreshToken", refreshToken));
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write(objectMapper.writeValueAsString(tokens));
     }
 }
