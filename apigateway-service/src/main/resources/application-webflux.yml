@@ -47,6 +47,11 @@ spring:
                 - AddRequestHeader=filter-add-request, 2nd-request-header-added
                 - AddResponseHeader=filter-add-response, 2nd-response-header-added
                 - CustomFilter
+                  # .*(아무 문자나 0개 이상 이어짐) -> 이거를 segemnt 라는 그룹이름으로 캡처하겠다.
+                # () : 그룹 캡처
+                # ?<name> : 그룹 이름 지정
+#                - RemoveRequestHeader=Cookie
+#                - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - id: catalog-service
               uri: lb://CATALOG-SERVICE
               predicates:
