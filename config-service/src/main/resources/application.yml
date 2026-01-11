@@ -1,0 +1,16 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+
+  cloud:
+    config:
+      server:
+        git: # default
+          # protocol: file//
+          # file path: /Users/gno_root/Desktop/open_the_door/lets_developing/start_architecture/msa/config-source
+          uri: file:///Users/gno_root/Desktop/open_the_door/lets_developing/start_architecture/msa/config-source
+          default-label: main
+
