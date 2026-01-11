@@ -1,0 +1,27 @@
+
+gateway:
+  ip: 192.168.0.123
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa_user_service
+    username: root
+    password: 1111
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      ssl:
+        enabled: false
+
+jwt:
+  secret: zero-coca-cola-change-changed-for-real-this-is-from-config-server-yea-yea-yea-yea-yea-yea-yea-yea
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+
+freshmen:
+  ment: shinzo-sasageo(config-service)
+
+for:
+  native: native-but-dev
