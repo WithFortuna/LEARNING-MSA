@@ -15,7 +15,11 @@ public class HealthCheckController {
 	public String healthCheck() {
 		// server.port: .yml에 적은 포트(ex 0)
 		// local.server.port: 실제 실행된 포트(차이가 있으려면 랜덤 포트일 때만 의미가 있음)
-		return String.format("Service is up \nset server port: %s, and running on port %s",
-			environment.getProperty("server.port"), environment.getProperty("local.server.port"));
+		return String.format("Service is up \nset server port: %s, and running on port %s\ntoken secret: %s",
+			environment.getProperty("server.port"),
+			environment.getProperty("local.server.port"),
+			environment.getProperty("jwt.secret")
+		);
+		// return "hello this is health check";
 	}
 }

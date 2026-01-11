@@ -5,6 +5,8 @@ import cleanhouse.userservice.user.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -37,6 +39,13 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public Optional<User> findById(Long id) {
         return springDataRepository.findById(id)
+                .map(entity -> modelMapper.map(entity, User.class));
+    }
+
+    @Override
+    public Page<User> findAll(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return springDataRepository.findAll(pageRequest)
                 .map(entity -> modelMapper.map(entity, User.class));
     }
 }
