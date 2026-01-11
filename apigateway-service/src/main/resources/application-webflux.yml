@@ -5,7 +5,13 @@ spring:
   application:
     name: apigateway-service
 
+  config:
+    import: optional:configserver:http://localhost:8888
+
   cloud:
+    config:
+      name: ecommerce
+
     gateway:
       server:
         webflux:
@@ -16,7 +22,7 @@ spring:
                 preLogger: true
                 postLogger: true
             - name: ServicePrefixStripGlobalFilter
-            - name: AuthorizationHeaderFilter
+#            - name: AuthorizationHeaderFilter
           routes:
             - id: first-service
               uri: lb://FIRST-SERVICE
@@ -82,4 +88,15 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 jwt:
-  secret-key: ${JWT_SECRET}
+  secret: ${JWT_SECRET}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+          - info
+          - beans
+          - health
+          - httpexchanges
