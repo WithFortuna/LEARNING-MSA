@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/msa_user_service
     username: root
-    password: '{cipher}26d53ccf139cd94d12855e5e5f41718ad49958bae3674b181bda99e42d1ac48a'
+    password: '{cipher}AQCHVTT8tN6bx1dPR3WiKkhgDjct86Py48zXfFDc09LFsibgD6WMFPfEAr5BtJO5VzRRv+yrk03G7Gq7zODAQztJ0a/4NcH9NOBSwK3+cTdhqXg2YMnkwbx81/+5Mz5/jozbStA7dy3C8gKWhBVDdA5wPDav70QbN9ge/UOFfT3kB9HMiIAzCDwdG5Qb2mCje3jJNN/alLe5wvVS8n0cwUaudl8B2SB1JYkEbJTGeH2pglxPn8A7gP7UNwdcRSHazDLSssNMATnJgOisx//Sfn64m5xUoC6L/lFcg3v0RJOengufqcHubmYQeFQrYS4/NZVc9Ns/M8hzPsrvz1pSxw78EHoD0cr8ldYJmhtRucTReJiY8TyZaYqJaf/CA5NQ4ZY='
 
   data:
     redis:
@@ -12,7 +12,7 @@ spring:
         enabled: false
 
 jwt:
-  secret: zero-coca-cola-change-changed-for-real-this-is-from-config-server-yea-yea-yea-yea-yea-yea-yea-yea
+  secret: '{cipher}AQCebs/shSeT/wO3ui3pugoUsvHoqUYGNR5gCh2B2Mu/G7t1qN17DH07b/2/XknJM1MbyS4HVjH7efsTh7cDs+sRYyucHqzGQauz8xfrzp1zi4mSt7CNuTyz3RpuALdwbwOBkrzwRLHgQsudaHbBZ3Ley+/Aj4LHeddwsG+RxbuXcAS93CKFGqMdRe3S3cdDLQYH5DcBxsExXeVZRoivbrt+0oCu+CI8KDtFKwZZ/csCOxftnvbxnTuNwDcDyDJs8malOXA4rx6cljJeBqzm9g5OPcD51YSlZfaIsItH6TBVe9iO+ckRvWHOh04ESgnLwrYnI183RB0Fb8Svy/VlSNgRjN5UQSBvdRZ+L00fAINzMLb0z8ZGLs2W8TCWtBDlKdKggg75I/s3GKM0qDiqsLfUJz8DOd0emwxeNjXgpw5/WgsSMStR0OR+ERQiu0tsuqpM0m83eWC0V2YKNbM4JQ4loPIyp1TJLl3dRtLRmFgz15DPTANq/Q6ZWMIE4nyRz2U='
   access-token-expiration: 900000
   refresh-token-expiration: 604800000
 
