@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @Component
 public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<AuthorizationHeaderFilter.Config> {
-	@Value("${jwt.secret-key}")
+	@Value("${jwt.secret}")
 	private String secretKey;
 
 	public AuthorizationHeaderFilter() {
