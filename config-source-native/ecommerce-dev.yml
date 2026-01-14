@@ -21,7 +21,7 @@ jwt:
   refresh-token-expiration: 604800000
 
 freshmen:
-  ment: shinzo-sasageo(config-service)
+  ment: broobrolo-notChangeRequestDirectly
 
 for:
   native: native-but-dev

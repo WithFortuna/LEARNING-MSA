@@ -23,7 +23,18 @@ ext {
 }
 
 dependencies {
+    // spring cloud config server
     implementation 'org.springframework.cloud:spring-cloud-config-server'
+
+    // spring cloud bus
+    implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+    // Spring actuator
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+
+//     bootstrap
+//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

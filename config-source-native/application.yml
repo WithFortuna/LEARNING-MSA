@@ -1,0 +1,23 @@
+
+gateway:
+  ip: 192.168.0.123
+
+spring:
+#  data:
+#    redis:
+#      host: localhost
+#      port: 6379
+#      ssl:
+#        enabled: false
+
+jwt:
+  secret: updated-again-in-config-service-zero-coca-cola-change-changed-for-real-this-is-from-config-server-yea-yea-yea-yea-yea-yea-yea-yea
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+
+freshmen:
+  ment: shinzo-sasageo-gitit-config-service
+
+for:
+  native: hallo
+  gitit: gno-gitit-only-application.yml

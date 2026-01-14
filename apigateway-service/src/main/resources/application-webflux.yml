@@ -5,12 +5,18 @@ spring:
   application:
     name: apigateway-service
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
   config:
     import: optional:configserver:http://localhost:8888
 
   cloud:
     config:
-      name: ecommerce
+      name: config-service
 
     gateway:
       server:
@@ -95,8 +101,10 @@ management:
     web:
       exposure:
         include:
-          - refresh
-          - info
-          - beans
+          - env
           - health
+          - beans
+          - info
+          - refresh
           - httpexchanges
+          - busrefresh

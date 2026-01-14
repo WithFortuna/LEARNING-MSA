@@ -4,11 +4,11 @@ server:
 spring:
   application:
     name: user-service
-
-  datasource:
-    url: ${RDB_URL}
-    username: ${RDB_USERNAME}
-    password: ${RDB_PASSWORD}
+# config service로부터 받아올거임
+#  datasource:
+#    url: ${RDB_URL}
+#    username: ${RDB_USERNAME}
+#    password: ${RDB_PASSWORD}
 
   jpa:
     hibernate:
@@ -29,11 +29,16 @@ spring:
 
   cloud:
     config:
-      name: ecommerce
+      name: user-service
   config:
     import: optional:configserver:http://localhost:8888
 #    <eureka-service-id>
 #    import: configserver:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 jwt:
   secret: ${JWT_SECRET}
@@ -61,9 +66,7 @@ management:
           - beans
           - info
           - refresh
-
-freshmen:
-  ment: shinzo-sasageo(user-service)
+          - busrefresh
 
 
 for:

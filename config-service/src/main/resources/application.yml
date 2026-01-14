@@ -20,4 +20,20 @@ spring:
 #          uri: file:///Users/gno_root/Desktop/open_the_door/lets_developing/start_architecture/msa/config-source
           uri: https://github.com/WithFortuna/spring-cloud-config-repository
           default-label: main
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - env
+          - health
+          - beans
+          - info
+          - refresh
+          - busrefresh
