@@ -37,3 +37,6 @@ management:
           - info
           - refresh
           - busrefresh
+
+encrypt:
+  key: this-is-symmetric-key-example123412341234

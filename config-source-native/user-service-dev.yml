@@ -1,2 +1,20 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa_user_service
+    username: root
+    password: '{cipher}26d53ccf139cd94d12855e5e5f41718ad49958bae3674b181bda99e42d1ac48a'
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      ssl:
+        enabled: false
+
+jwt:
+  secret: zero-coca-cola-change-changed-for-real-this-is-from-config-server-yea-yea-yea-yea-yea-yea-yea-yea
+  access-token-expiration: 900000
+  refresh-token-expiration: 604800000
+
 for:
   you: dev--this-is-for-user-service-from-native-source
