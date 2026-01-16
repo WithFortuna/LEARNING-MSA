@@ -61,7 +61,10 @@ public class SecurityConfig {
 						"/auth/login",
 						"/auth/refresh"
 					).permitAll()
-					.requestMatchers(GET, "/users/list", "/users/me").authenticated()
+					.requestMatchers(GET,
+						"/users/list",
+						"/users/me"
+					).authenticated()
 					.anyRequest().authenticated()
                /* /// Spring security에서 ip 제어를 통해 API gateway 에서 오는 것만 수용하는 도 가능하다만,
                 /// 그거 보다는 infra 수준 격리가 더 낫다

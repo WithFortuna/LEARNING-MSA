@@ -29,17 +29,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final CustomUserDetailsService userDetailsService;
     private final TokenBlacklistAdapter tokenBlacklistAdapter;
 
-    private static final List<String> EXCLUDED_PATHS = Arrays.asList(
-            "/auth/login",
-            "/auth/refresh",
-            "/users",
-            "/health",
-            "/welcome"
-    );
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        log.info("[JwtAuhtneticationFilter] jwt인증 필터 진입");
         try {
             String jwt = getJwtFromRequest(request);
 
@@ -69,8 +62,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     log.debug("Set authentication for user: {}", email);
                 }
             }
-        } catch (InvalidTokenException e) {
-            log.error("Could not set user authentication: {}", e.getMessage());
         } catch (Exception e) {
             log.error("Authentication error: {}", e.getMessage());
         }
@@ -80,20 +71,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private static boolean requestIncludeToken(String jwt) {
         return StringUtils.hasText(jwt);
-    }
-
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        String path = request.getRequestURI();
-        String method = request.getMethod();
-
-        return EXCLUDED_PATHS.stream()
-                .anyMatch(excluded -> {
-                    if (excluded.equals("/users") && "POST".equals(method)) {
-                        return path.equals(excluded);
-                    }
-                    return path.startsWith(excluded);
-                });
     }
 
     private String getJwtFromRequest(HttpServletRequest request) {

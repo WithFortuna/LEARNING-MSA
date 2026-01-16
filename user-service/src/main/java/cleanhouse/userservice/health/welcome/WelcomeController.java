@@ -16,14 +16,15 @@ public class WelcomeController {
 
 	@GetMapping("/welcome")
 	public String welcome(HttpServletRequest request) {
-		return String.format("Welcome to the User Service.\nuser.welcome ip-> remote addr:%s, remote host:%s, request URI:%s, request URL:%s, greeting ment: %s\nfor you: %s and default profile: %s",
+		return String.format("Welcome to the User Service.\nuser.welcome ip-> remote addr:%s, remote host:%s, request URI:%s, request URL:%s, greeting ment: %s\nfor you: %s and default profile: %s\nfresh man ment: %s",
 			request.getRemoteAddr(),
 			request.getRemoteHost(),
 			request.getRequestURI(),
 			request.getRequestURL(),
 			environment.getProperty("freshmen.ment"),
 			environment.getProperty("for.you"),
-			environment.getProperty("for.default-profile")
+			environment.getProperty("for.default-profile"),
+			environment.getProperty("spring.datasource.password")
 		);
 	}
 }
