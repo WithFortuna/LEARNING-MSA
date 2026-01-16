@@ -30,7 +30,7 @@ public class Catalog {
                 productName,
                 stock,
                 unitPrice,
-                LocalDateTime.now()
+                null
         );
     }
 }
