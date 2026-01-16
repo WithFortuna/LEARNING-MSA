@@ -9,3 +9,4 @@ eureka:
   client:
     register-with-eureka: false # not register service-discovery-server itself to Eureka
     fetch-registry: false       # not fetch registry information to itself
+    response-cache-update-interval-ms: 5000
