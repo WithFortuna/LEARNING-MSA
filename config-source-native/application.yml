@@ -21,3 +21,7 @@ freshmen:
 for:
   native: hallo
   gitit: gno-gitit-only-application.yml
+
+order-service:
+#  url: http://127.0.0.1:8000/order-service
+  url: http://order-service/

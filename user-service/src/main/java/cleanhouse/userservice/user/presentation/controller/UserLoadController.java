@@ -9,6 +9,8 @@ import cleanhouse.userservice.user.application.query.GetCurrentUserQuery;
 import cleanhouse.userservice.user.application.query.GetUsersQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequiredArgsConstructor
 public class UserLoadController {
+    @Value("${order-service.url}")
+    private String orderServiceUrl;
+
     private final UserQueryUsecase userQueryUsecase;
     private final RestTemplate restTemplate;
 
@@ -45,7 +50,8 @@ public class UserLoadController {
         UserResponse response = userQueryUsecase.getCurrentUser(query);
 
         OrderListResponse orderListResponse = null;
-        orderListResponse = restTemplate.getForObject("http://order-service/orders", OrderListResponse.class);
+        String requestUrl = String.format(orderServiceUrl + "/%s/orders", response.getUserId());
+        orderListResponse = restTemplate.getForObject(requestUrl, OrderListResponse.class);
 
         if (orderListResponse != null && orderListResponse.getOrders() != null) {
             response.setOrders(orderListResponse.getOrders());
