@@ -5,6 +5,12 @@ spring:
   application:
     name: order-service
 
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: order-service
+
   datasource:
     url: ${RDB_URL}
     username: ${RDB_USERNAME}
@@ -29,3 +35,15 @@ eureka:
 
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - env
+          - health
+          - beans
+          - info
+          - refresh
+          - busrefresh
