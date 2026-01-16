@@ -1,6 +1,7 @@
 package cleanhouse.userservice.user.presentation.controller;
 
 import cleanhouse.userservice.security.infrastructure.userdetails.CustomUserDetails;
+import cleanhouse.userservice.user.application.dto.OrderListResponse;
 import cleanhouse.userservice.user.application.dto.UserListResponse;
 import cleanhouse.userservice.user.application.dto.UserResponse;
 import cleanhouse.userservice.user.application.port.UserQueryUsecase;
@@ -13,12 +14,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 public class UserLoadController {
     private final UserQueryUsecase userQueryUsecase;
+    private final RestTemplate restTemplate;
 
     @GetMapping("/users/list")
     public ResponseEntity<UserListResponse> getUsers(
@@ -40,6 +43,13 @@ public class UserLoadController {
 
         GetCurrentUserQuery query = GetCurrentUserQuery.from(email);
         UserResponse response = userQueryUsecase.getCurrentUser(query);
+
+        OrderListResponse orderListResponse = null;
+        orderListResponse = restTemplate.getForObject("http://order-service/orders", OrderListResponse.class);
+
+        if (orderListResponse != null && orderListResponse.getOrders() != null) {
+            response.setOrders(orderListResponse.getOrders());
+        }
 
         return ResponseEntity.ok(response);
     }
