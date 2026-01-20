@@ -72,3 +72,7 @@ management:
 for:
   you: from-user-service.yml
   default-profile: hallo-from-user-service-dev
+
+logging:
+  level:
+    cleanhouse.userservice.user.adapter.out.client: DEBUG

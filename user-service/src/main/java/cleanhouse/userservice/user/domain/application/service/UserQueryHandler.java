@@ -1,5 +1,6 @@
 package cleanhouse.userservice.user.domain.application.service;
 
+import cleanhouse.userservice.user.adapter.out.client.OrderServiceClient;
 import cleanhouse.userservice.user.adapter.out.client.OrderServiceRestTemplateClient;
 import cleanhouse.userservice.user.domain.application.dto.OrderListResponse;
 import cleanhouse.userservice.user.domain.application.dto.UserListResponse;
@@ -10,7 +11,11 @@ import cleanhouse.userservice.user.domain.application.dto.GetUsersQuery;
 import cleanhouse.userservice.user.domain.entity.User;
 import cleanhouse.userservice.user.domain.exception.UserNotFoundException;
 import cleanhouse.userservice.user.domain.application.port.out.UserRepository;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,12 +23,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
 public class UserQueryHandler implements UserQueryUsecase {
     private final UserRepository userRepository;
-    private final OrderServiceRestTemplateClient orderServiceClient;
+    // @Qualifier("orderServiceRestTemplateClient")
+    @Qualifier("orderServiceFeignClient")
+    private final OrderServiceClient orderServiceClient;
 
     @Override
     public UserListResponse getUsers(GetUsersQuery query) {
@@ -49,7 +57,13 @@ public class UserQueryHandler implements UserQueryUsecase {
 
         UserResponse response = UserResponse.from(user);
 
-        OrderListResponse orderListResponse = orderServiceClient.getOrders(response.getUserId());
+        OrderListResponse orderListResponse = null;
+        // try {
+            orderListResponse = orderServiceClient.getOrders(response.getUserId());
+        // } catch (FeignException exception) {
+        //     log.error(exception.getMessage(), exception);
+        // }
+
 
         if (orderListResponse != null && orderListResponse.getOrders() != null) {
             response.setOrders(orderListResponse.getOrders());

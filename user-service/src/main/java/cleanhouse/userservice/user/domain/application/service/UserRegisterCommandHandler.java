@@ -1,9 +1,10 @@
-package cleanhouse.userservice.user.application.command;
+package cleanhouse.userservice.user.domain.application.service;
 
-import cleanhouse.userservice.user.application.port.UserRegisterUsecase;
+import cleanhouse.userservice.user.domain.application.dto.UserRegisterCommand;
+import cleanhouse.userservice.user.domain.application.port.in.UserRegisterUsecase;
 import cleanhouse.userservice.user.domain.entity.User;
 import cleanhouse.userservice.user.domain.exception.DuplicateEmailException;
-import cleanhouse.userservice.user.domain.port.UserRepository;
+import cleanhouse.userservice.user.domain.application.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

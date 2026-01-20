@@ -49,6 +49,9 @@ dependencies {
     // spring cloud bus
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
+    // open feign
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
     // JWT
     implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
