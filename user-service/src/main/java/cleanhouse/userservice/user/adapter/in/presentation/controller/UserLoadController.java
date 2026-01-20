@@ -1,12 +1,13 @@
-package cleanhouse.userservice.user.presentation.controller;
+package cleanhouse.userservice.user.adapter.in.presentation.controller;
 
 import cleanhouse.userservice.security.infrastructure.userdetails.CustomUserDetails;
-import cleanhouse.userservice.user.application.dto.OrderListResponse;
-import cleanhouse.userservice.user.application.dto.UserListResponse;
-import cleanhouse.userservice.user.application.dto.UserResponse;
-import cleanhouse.userservice.user.application.port.UserQueryUsecase;
-import cleanhouse.userservice.user.application.query.GetCurrentUserQuery;
-import cleanhouse.userservice.user.application.query.GetUsersQuery;
+import cleanhouse.userservice.user.adapter.out.client.OrderServiceRestTemplateClient;
+import cleanhouse.userservice.user.domain.application.dto.OrderListResponse;
+import cleanhouse.userservice.user.domain.application.dto.UserListResponse;
+import cleanhouse.userservice.user.domain.application.dto.UserResponse;
+import cleanhouse.userservice.user.domain.application.port.in.UserQueryUsecase;
+import cleanhouse.userservice.user.domain.application.dto.GetCurrentUserQuery;
+import cleanhouse.userservice.user.domain.application.dto.GetUsersQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,11 +23,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequiredArgsConstructor
 public class UserLoadController {
-    @Value("${order-service.url}")
-    private String orderServiceUrl;
-
     private final UserQueryUsecase userQueryUsecase;
-    private final RestTemplate restTemplate;
+    private final OrderServiceRestTemplateClient orderServiceClient;
 
     @GetMapping("/users/list")
     public ResponseEntity<UserListResponse> getUsers(
@@ -48,14 +46,6 @@ public class UserLoadController {
 
         GetCurrentUserQuery query = GetCurrentUserQuery.from(email);
         UserResponse response = userQueryUsecase.getCurrentUser(query);
-
-        OrderListResponse orderListResponse = null;
-        String requestUrl = String.format(orderServiceUrl + "/%s/orders", response.getUserId());
-        orderListResponse = restTemplate.getForObject(requestUrl, OrderListResponse.class);
-
-        if (orderListResponse != null && orderListResponse.getOrders() != null) {
-            response.setOrders(orderListResponse.getOrders());
-        }
 
         return ResponseEntity.ok(response);
     }

@@ -1,8 +1,8 @@
-package cleanhouse.userservice.user.presentation.controller;
+package cleanhouse.userservice.user.adapter.in.presentation.controller;
 
-import cleanhouse.userservice.user.application.command.UserRegisterCommand;
-import cleanhouse.userservice.user.application.dto.UserRegisterRequest;
-import cleanhouse.userservice.user.application.port.UserRegisterUsecase;
+import cleanhouse.userservice.user.domain.application.dto.UserRegisterCommand;
+import cleanhouse.userservice.user.domain.application.dto.UserRegisterRequest;
+import cleanhouse.userservice.user.domain.application.port.in.UserRegisterUsecase;
 import cleanhouse.userservice.user.domain.exception.DuplicateEmailException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
