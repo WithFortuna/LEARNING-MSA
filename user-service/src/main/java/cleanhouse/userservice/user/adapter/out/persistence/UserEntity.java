@@ -1,4 +1,4 @@
-package cleanhouse.userservice.user.infrastructure.persistence;
+package cleanhouse.userservice.user.adapter.out.persistence;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
-package cleanhouse.userservice.user.infrastructure.persistence;
+package cleanhouse.userservice.user.adapter.out.persistence;
 
 import cleanhouse.userservice.user.domain.entity.User;
-import cleanhouse.userservice.user.domain.port.UserRepository;
+import cleanhouse.userservice.user.domain.application.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;

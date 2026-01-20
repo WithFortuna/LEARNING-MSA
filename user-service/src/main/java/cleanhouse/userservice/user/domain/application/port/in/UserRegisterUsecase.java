@@ -1,6 +1,6 @@
-package cleanhouse.userservice.user.application.port;
+package cleanhouse.userservice.user.domain.application.port.in;
 
-import cleanhouse.userservice.user.application.command.UserRegisterCommand;
+import cleanhouse.userservice.user.domain.application.dto.UserRegisterCommand;
 import cleanhouse.userservice.user.domain.exception.DuplicateEmailException;
 
 public interface UserRegisterUsecase {

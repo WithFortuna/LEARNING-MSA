@@ -1,6 +1,5 @@
-package cleanhouse.userservice.user.application.command;
+package cleanhouse.userservice.user.domain.application.dto;
 
-import cleanhouse.userservice.user.application.dto.UserRegisterRequest;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

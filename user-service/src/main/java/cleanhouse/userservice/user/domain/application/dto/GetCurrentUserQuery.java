@@ -1,4 +1,4 @@
-package cleanhouse.userservice.user.application.query;
+package cleanhouse.userservice.user.domain.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

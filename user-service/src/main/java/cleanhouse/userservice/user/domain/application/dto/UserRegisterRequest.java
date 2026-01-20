@@ -1,4 +1,4 @@
-package cleanhouse.userservice.user.application.dto;
+package cleanhouse.userservice.user.domain.application.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

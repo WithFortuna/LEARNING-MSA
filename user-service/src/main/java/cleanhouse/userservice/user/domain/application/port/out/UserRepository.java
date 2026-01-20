@@ -1,4 +1,4 @@
-package cleanhouse.userservice.user.domain.port;
+package cleanhouse.userservice.user.domain.application.port.out;
 
 import cleanhouse.userservice.user.domain.entity.User;
 import org.springframework.data.domain.Page;
