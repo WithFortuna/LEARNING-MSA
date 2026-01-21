@@ -9,7 +9,7 @@ spring:
     import: optional:configserver:http://localhost:8888
   cloud:
     config:
-      name: order-service
+      name: order-service-b
 
   datasource:
     url: ${RDB_URL}

@@ -1,0 +1,49 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: order-service
+
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: order-service-a
+
+  datasource:
+    url: ${RDB_URL}
+    username: ${RDB_USERNAME}
+    password: ${RDB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        default_batch_fetch_size: 100
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://127.0.0.1:8761/eureka # ?? eureka ??? ?????? ??
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - env
+          - health
+          - beans
+          - info
+          - refresh
+          - busrefresh

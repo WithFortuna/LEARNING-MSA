@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/msa_order_service_b
+    username: root
+    password: '{cipher}AQAkB1wzGP6d4ilbUn3BYCv9HOyqUa7p1aM1HLvQW9AoxMMOIZwylLyOzHS9fgnsEO+Zoysj95Tp2Jb35xf4j3RiBdLOdoLH1m8ZauL7mLB7Mvu5mwTCJjuKYh2sJFTDaFoTh6NHLzJ7K1UpxBVVfpl/3tdA403S7jr0mvme7x7bYw9k5kfsNTbMKLikRec5IWhzfzmDyQ3eBjQb7GaeULwhifySp5MogiIOW8sodO74XDgONQUjdJ9FZ0u80GRmqc+XfNykD8NTeIHsXz4OXPUE4x+TT3CIe2cpIOqX4QP0BgSuU0ya0W2dfLBkLrmYxR90/6fltU3G69l8CanhfjlnYQoo4NIYygs8dbBVUCn22yBWXsCg71ivllDw/Dmr7gk='
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        default_batch_fetch_size: 100
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://127.0.0.1:8761/eureka # ?? eureka ??? ?????? ??
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
