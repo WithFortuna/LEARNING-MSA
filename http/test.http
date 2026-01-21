@@ -10,7 +10,169 @@ POST localhost:8000/user-service/users
 Content-Type: application/json
 
 {
-  "email": "rmsghchl02@gmail.com",
-  "name":"gno1",
-  "password": "12345"
+  "email": "abcd@gmail.com",
+  "name":"gno21",
+  "password": "1111"
 }
+
+### [user] health check
+GET localhost:8000/user-service/health-check
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzY4MDUwNTI2LCJleHAiOjE3NjgwNTE0MjZ9.15na0Wziqt5PqI2IEbsK5hASPs7UUBDdPVuhadq7QfCQS9DLhfSSLoKhx314Ghrn10_Kc44IgluwnuK-DjfsbA
+
+### login
+POST localhost:8000/user-service/auth/login
+Content-Type: application/json
+
+{
+  "email": "abcd@gmail.com",
+  "password": "1111"
+}
+
+### [user] load users
+GET localhost:8000/user-service/users/list
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzY3OTUzOTE4LCJleHAiOjE3Njc5NTQ4MTh9.UrpRub_iB_J4FJNcqz0i5JHhBWS52HpDYhoI_Ec-q_c1Qhn24JDm1KebEzH2chmY5LMEGHkucd8mtAyutALXPQ
+
+### [user] load me
+GET localhost:8000/user-service/users/me
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNkQGdtYWlsLmNvbSIsInJvbGUiOiJST0xFX1VTRVIiLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzY4OTIzMDcwLCJleHAiOjE3Njg5MjM5NzB9.ic0YptQ-oBo9G9_X-a6EhQXwPCOvaQO0sEWfSf8kyrMTcJFr2iaSDRr5qccKSgHpgtR5yZQhym3AYNY2-dZIbw
+
+### direct health check
+GET localhost:51056/health-check
+
+### refresh config enviromnet without reloading user-service server
+POST localhost:8000/user-service/actuator/refresh
+
+### httpexchanges
+GET localhost:8000/actuator/httpexchanges
+
+### reload config
+POST localhost:8000/actuator/busrefresh
+
+
+### httpexchanges
+GET localhost:8000/actuator/health
+
+### welcome check
+GET localhost:8000/user-service/welcome
+
+### direct welcome check
+GET localhost:63129/welcome
+
+### refresh userservice
+POST localhost:58019/actuator/refresh
+
+### welcome check
+GET localhost:8000/order-service/welcome
+
+### encrypt
+POST localhost:8888/encrypt
+Content-Type: text/plain
+
+1111
+
+### decrypt
+POST localhost:8888/decrypt
+Content-Type: text/plain
+
+AQCHVTT8tN6bx1dPR3WiKkhgDjct86Py48zXfFDc09LFsibgD6WMFPfEAr5BtJO5VzRRv+yrk03G7Gq7zODAQztJ0a/4NcH9NOBSwK3+cTdhqXg2YMnkwbx81/+5Mz5/jozbStA7dy3C8gKWhBVDdA5wPDav70QbN9ge/UOFfT3kB9HMiIAzCDwdG5Qb2mCje3jJNN/alLe5wvVS8n0cwUaudl8B2SB1JYkEbJTGeH2pglxPn8A7gP7UNwdcRSHazDLSssNMATnJgOisx//Sfn64m5xUoC6L/lFcg3v0RJOengufqcHubmYQeFQrYS4/NZVc9Ns/M8hzPsrvz1pSxw78EHoD0cr8ldYJmhtRucTReJiY8TyZaYqJaf/CA5NQ4ZY=
+
+
+### [catalog] health
+GET localhost:8000/catalog-service/actuator/health
+
+### [catalog] create product
+POST http://localhost:8000/catalog-service/catalogs
+Content-Type: application/json
+
+{
+  "productName": "Durian ZZANDUK",
+  "stock": 3,
+  "unitPrice": 7000
+}
+
+### [order] health
+GET localhost:8000/order-service/actuator/health
+
+### [order] create order
+POST localhost:8000/order-service/orders
+Content-Type: application/json
+
+{
+  "userId": "dc35481f-ba91-439f-b6cf-59def4c4e96c",
+  "productId": "f56bbf9b-25f0-471e-a973-cb8f2af7dc54",
+  "price":1200000.00,
+  "quantity": 1
+}
+
+### [order] load order
+GET localhost:8000/order-service/dc35481f-ba91-439f-b6cf-59def4c4e96c/orders
+
+### [Kafka Connect] 커넥터 등록 - source connector
+POST localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "my-source-connect-v2",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:mysql://localhost:3306/mydb",
+    "connection.user": "root",
+    "connection.password": "1111",
+    "mode": "incrementing",
+    "incrementing.column.name": "id",
+    "table.whitelist": "mydb.users",
+    "topic.prefix": "my_topic_v2_",
+    "tasks.max": "1"
+  }
+}
+
+### [Kafka Connect] 커넥터 등록 - sink connector
+POST localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "my-sink-connect-v2",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:mysql://localhost:3306/mydb",
+    "connection.user": "root",
+    "connection.password": "1111",
+    "auto.create": "true",
+    "auto.evolve": "true",
+    "delete.enabled": "false",
+    "tasks.max": "1",
+    "topics": "my_topic_v2_users"
+  }
+}
+
+### [Kafka Connect] 커넥터 조회
+GET localhost:8083/connectors
+
+### [Kafka Connect] 플러그인 조회
+GET localhost:8083/connector-plugins
+
+### [Kafka Connect] 커넥터 수정
+PUT localhost:8083/connectors/my-source-connect-v2/config
+Content-Type: application/json
+
+{
+  "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+  "connection.url": "jdbc:mysql://localhost:3306/mydb",
+  "connection.user": "root",
+  "connection.password": "1111",
+
+  "mode": "incrementing",
+  "incrementing.column.name": "id",
+
+  "table.whitelist": "mydb.users",
+  "topic.prefix": "my_topic_v2_",
+
+  "tasks.max": "1"
+}
+
+### [Kafka Connect] 커넥터 상태조회
+GET localhost:8083/connectors/my-sink-connect-v2/status
+
+###
+DELETE localhost:8083/connectors/my-sink-connect-v2
+
