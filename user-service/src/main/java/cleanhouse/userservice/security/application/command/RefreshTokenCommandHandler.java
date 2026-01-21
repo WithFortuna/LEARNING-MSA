@@ -7,7 +7,7 @@ import cleanhouse.userservice.security.infrastructure.jwt.JwtTokenProvider;
 import cleanhouse.userservice.security.infrastructure.token.RefreshTokenStoreAdapter;
 import cleanhouse.userservice.user.domain.entity.User;
 import cleanhouse.userservice.user.domain.exception.UserNotFoundException;
-import cleanhouse.userservice.user.domain.port.UserRepository;
+import cleanhouse.userservice.user.domain.application.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

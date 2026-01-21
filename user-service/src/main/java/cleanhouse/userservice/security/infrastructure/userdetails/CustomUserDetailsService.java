@@ -1,7 +1,7 @@
 package cleanhouse.userservice.security.infrastructure.userdetails;
 
 import cleanhouse.userservice.user.domain.entity.User;
-import cleanhouse.userservice.user.domain.port.UserRepository;
+import cleanhouse.userservice.user.domain.application.port.out.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

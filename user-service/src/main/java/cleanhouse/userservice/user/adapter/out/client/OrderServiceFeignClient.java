@@ -10,6 +10,6 @@ import cleanhouse.userservice.user.domain.application.dto.OrderListResponse;
 @FeignClient(name = "order-service", configuration = FeignErrorDecoder.class)	// service-discovery에 등록된 호출할 서버의 application name & OpenFeign 라이브러리가 빈으로 등록도 해줌
 public interface OrderServiceFeignClient extends OrderServiceClient{
 	@Override
-	@GetMapping("/{userId}/orders/wrongEndpoint")
+	@GetMapping("/{userId}/orders")
 	OrderListResponse getOrders(@PathVariable String userId);
 }
