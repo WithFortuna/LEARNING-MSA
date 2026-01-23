@@ -5,6 +5,12 @@ spring:
   application:
     name: catalog-service
 
+  config:
+    import: optional:configserver:http://localhost:8888
+  cloud:
+    config:
+      name: application
+
   datasource:
     url: ${RDB_URL}
     username: ${RDB_USERNAME}
