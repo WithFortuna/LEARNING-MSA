@@ -1,5 +1,5 @@
 ### welcome
-GET localhost:8081/first-service/welcome
+GET localhost:8000/first-service/welcome
 
 ### message
 GET localhost:8081/first-service/message
@@ -171,8 +171,27 @@ Content-Type: application/json
 }
 
 ### [Kafka Connect] 커넥터 상태조회
-GET localhost:8083/connectors/my-sink-connect-v2/status
+GET localhost:8083/connectors/order-sink-connect/status
 
-###
+### [Kafka Connect] 커넥터 삭제
 DELETE localhost:8083/connectors/my-sink-connect-v2
 
+
+### [Kafka Connect] order 커넥터 등록 - sink connector
+POST localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "order-sink-connect",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:mysql://localhost:3306/msa_order_service",
+    "connection.user": "root",
+    "connection.password": "1111",
+    "auto.create": "true",
+    "auto.evolve": "true",
+    "delete.enabled": "false",
+    "tasks.max": "1",
+    "topics": "orders"
+  }
+}
