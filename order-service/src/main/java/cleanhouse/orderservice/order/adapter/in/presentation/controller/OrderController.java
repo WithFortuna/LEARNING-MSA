@@ -8,6 +8,7 @@ import cleanhouse.orderservice.order.domain.application.port.in.OrderCreateUseca
 import cleanhouse.orderservice.order.domain.application.port.in.OrderQueryUsecase;
 import cleanhouse.orderservice.order.domain.application.service.GetOrdersByUserIdQuery;
 import cleanhouse.orderservice.order.domain.application.service.GetOrdersQuery;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +24,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 public class OrderController {
     @Value("${kafka.topic.catalog}")
     private String catalogTopic;
 
     private final OrderCreateUsecase orderCreateUsecase;
     private final OrderQueryUsecase orderQueryUsecase;
+    private final KafkaProducerPort kafkaProducerPort;
+
+    @Autowired
+    public OrderController(
+            @Qualifier("orderCreateKafkaService") OrderCreateUsecase orderCreateUsecase,
+            OrderQueryUsecase orderQueryUsecase,
+            KafkaProducerPort kafkaProducerPort) {
+        this.orderCreateUsecase = orderCreateUsecase;
+        this.orderQueryUsecase = orderQueryUsecase;
+        this.kafkaProducerPort = kafkaProducerPort;
+    }
 
     @PostMapping("/orders")
-    public ResponseEntity<Long> createOrder(@RequestBody OrderCreateRequest request) {
+    public ResponseEntity<Long> createOrder(@RequestBody @Valid OrderCreateRequest request) {
         log.info("Creating order for userId: {}, productId: {}", request.getUserId(), request.getProductId());
         try {
             Long orderId = orderCreateUsecase.create(CreateOrderCommand.from(request));

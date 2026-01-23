@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class CreateOrderCommandHandler implements OrderCreateUsecase {
+public class OrderCreateJpaService implements OrderCreateUsecase {
     private final OrderRepository orderRepository;
 
     @Override

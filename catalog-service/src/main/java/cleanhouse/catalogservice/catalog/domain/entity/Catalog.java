@@ -33,4 +33,8 @@ public class Catalog {
                 null
         );
     }
+
+    public void updateStock(int stock) {
+        this.stock = stock;
+    }
 }
