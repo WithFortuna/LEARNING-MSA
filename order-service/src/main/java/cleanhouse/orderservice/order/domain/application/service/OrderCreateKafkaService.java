@@ -22,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class OrderCreateKafkaService implements OrderCreateUsecase {
 	@Value("${kafka.topic.order.create}")
 	private String orderTopic;
+	@Value("${kafka.topic.catalog}")
+	private String catalogTopic;
 
 	private final OrderRepository orderRepository;
 	private final KafkaProducerPort kafkaProducerPort;
@@ -37,9 +39,15 @@ public class OrderCreateKafkaService implements OrderCreateUsecase {
 
 		KafkaMessage kafkaMessage = new KafkaMessage(schema, payload);
 
-		kafkaProducerPort.send(orderTopic, kafkaMessage);
+		sendCreateQueryToSinkConnector(kafkaMessage);
+
+		synchronizeProductQuantity(command);
 
 		return 1L;	// TODO: 카프카로 데이터 삽입할 때는 반환값 id 어떻게?
+	}
+
+	private void sendCreateQueryToSinkConnector(KafkaMessage kafkaMessage) {
+		kafkaProducerPort.send(orderTopic, kafkaMessage);
 	}
 
 	private static KafkaSchema buildKafkaSchema(List<Field> fields) {
@@ -69,5 +77,9 @@ public class OrderCreateKafkaService implements OrderCreateUsecase {
 			command.getPrice().multiply(BigDecimal.valueOf(command.getQuantity())),
 			command.getQuantity()
 		);
+	}
+
+	private void synchronizeProductQuantity(CreateOrderCommand command) {
+		kafkaProducerPort.send(catalogTopic, command);
 	}
 }

@@ -25,9 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class OrderController {
-    @Value("${kafka.topic.catalog}")
-    private String catalogTopic;
-
     private final OrderCreateUsecase orderCreateUsecase;
     private final OrderQueryUsecase orderQueryUsecase;
     private final KafkaProducerPort kafkaProducerPort;
@@ -47,7 +44,6 @@ public class OrderController {
         log.info("Creating order for userId: {}, productId: {}", request.getUserId(), request.getProductId());
         try {
             Long orderId = orderCreateUsecase.create(CreateOrderCommand.from(request));
-            kafkaProducerPort.send(catalogTopic, request); // TODO: 컨트롤러 에서 orderUsecase랑 kafkaProducer를 모두 호출하고있는게 마음에 안듦. 그렇다고 orderUsecase에 kafka 보내는 로직을 넣는게 맞는건지도 헷갈림
 
             return ResponseEntity.status(HttpStatus.CREATED).body(orderId);
         } catch (IllegalArgumentException e) {
