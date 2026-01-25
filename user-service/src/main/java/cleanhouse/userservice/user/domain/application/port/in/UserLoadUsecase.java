@@ -5,7 +5,7 @@ import cleanhouse.userservice.user.domain.application.dto.UserResponse;
 import cleanhouse.userservice.user.domain.application.dto.GetCurrentUserQuery;
 import cleanhouse.userservice.user.domain.application.dto.GetUsersQuery;
 
-public interface UserQueryUsecase {
+public interface UserLoadUsecase {
     UserListResponse getUsers(GetUsersQuery query);
     UserResponse getCurrentUser(GetCurrentUserQuery query);
 }

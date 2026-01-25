@@ -20,6 +20,12 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<String> handleCustomException(CustomException e) {
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
+            .body(e.getErrorCode().getMessage());
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException e) {
         log.error("User not found: {}", e.getMessage());
