@@ -47,3 +47,12 @@ management:
           - info
           - refresh
           - busrefresh
+  tracing:  # 요청에서 트레이싱 샘플링할 비율
+    sampling:
+      probability: 1.0  # 100%
+    propagation:
+      type: b3  # B3 propagation format 사용
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
