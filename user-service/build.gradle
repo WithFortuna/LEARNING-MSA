@@ -55,6 +55,15 @@ dependencies {
     // circuit breaker
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 
+    // distributed tracing
+//    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth' // Brave, Zipkin reporter 등록 => 지원 종료로 maven repostiroy에서 artifact 제공안함
+//    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    implementation "io.micrometer:micrometer-tracing"
+    implementation "io.micrometer:micrometer-tracing-bridge-brave"
+    implementation "io.zipkin.reporter2:zipkin-reporter-brave"
+//    implementation "io.micrometer:context-propagation"
+//    implementation "io.projectreactor:reactor-core"
+
 
 
     // JWT
