@@ -66,12 +66,14 @@ public class ResilienceUserLoadService implements UserLoadUsecase {
         OrderListResponse orderListResponse = null;
 
         // circuit breaker 처리
+        log.info("[user-service] ------------------  order micro service 호출하기 전 ");
         CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
         orderListResponse = circuitbreaker.run(
             () -> orderServiceClient.getOrders(response.getUserId()),
             throwable -> {
                 throw new CustomException(ErrorCode.FIND_ORDER_NOT_AVAILABLE);
             });
+        log.info("[user-service] ------------------  order micro service 호출한 후 ");
 
         if (orderListResponse != null && orderListResponse.getOrders() != null) {
             response.setOrders(orderListResponse.getOrders());
