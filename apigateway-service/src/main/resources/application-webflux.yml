@@ -108,3 +108,5 @@ management:
           - refresh
           - httpexchanges
           - busrefresh
+          - metrics
+          - prometheus

@@ -47,6 +47,8 @@ management:
           - info
           - refresh
           - busrefresh
+          - metrics
+          - prometheus
   tracing:  # 요청에서 트레이싱 샘플링할 비율
     sampling:
       probability: 1.0  # 100%

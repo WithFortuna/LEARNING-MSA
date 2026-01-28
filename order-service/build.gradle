@@ -53,6 +53,9 @@ dependencies {
 //    implementation "io.micrometer:context-propagation"
 //    implementation "io.projectreactor:reactor-core"
 
+    // micrometer 측정값을 prometheus가 이해하는 포맷으로
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     implementation 'org.modelmapper:modelmapper:3.1.1'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
