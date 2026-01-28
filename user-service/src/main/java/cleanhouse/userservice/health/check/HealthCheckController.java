@@ -4,6 +4,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 public class HealthCheckController {
 	private final Environment environment;
 
+	@Timed(value = "users.status", description = "Health check")	// 이제 micrometer의 @Timed 쓰려면 spring aop 의존성 필요
 	@GetMapping("/health-check")
 	public String healthCheck() {
 		// server.port: .yml에 적은 포트(ex 0)
